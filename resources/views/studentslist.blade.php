@@ -25,12 +25,15 @@
                     <td>{{ $student->secondName }}</td>
                     <td>{{ $student->age }}</td>
                     <td>{{ $student->speciality }}</td>
-                    <td>
-
-                        <a href="{{ url('/edit/'.$student->id) }}" class="btn btn-sm btn-warning">Edit</a>
-
+                    <td style="padding-left: 0; padding-right:0; ">
+                    <form method="POST" action="{{ url('/delete/'.$student->id) }}" id="form-id">
+                        <input name="_method" value="DELETE" type="hidden">
+                        @csrf
+                        <a href="{{ url('/edit/'.$student->id) }}"  style=" width:40%; float:left" class="btn btn-sm btn-warning">Edit</a>
+                        <a onclick="document.getElementById('form-id').submit();" style="width:55%; margin-left:3px; background-color: rgb(153, 48, 48); float:left; color:aliceblue " class="btn btn-sm">delete</a>
+                    </form>
                     </td>
-
+{{-- href="{{ url('/delete/'.$student->id) }}"  --}}
 
                 </tr>
             @endforeach

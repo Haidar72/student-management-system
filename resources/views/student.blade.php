@@ -21,6 +21,40 @@
         <h1>Student Management System</h1>
     </div>
 </div>
+ @if ($layout == 'photo')
+  <div class="panel panel-primary">
+      <div class="panel-heading"><h2>Images Uploaded </h2></div>
+      <div class="panel-body">
+
+          @foreach ( $students as $student)
+          <img src="{{ url('') }}/images/{{$student->image}}" alt="">
+
+          @endforeach
+        {{-- @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+        </div>
+        <img src="images/{{ Session::get('image') }}">
+        @endif
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.
+                <ul>
+                    @foreach ($errors->all() as $error)
+
+                        <li>{{ $error }}</li>
+
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        {{ route('image.upload.post') }}
+        --}}
+
+      </div>
+    </div>
+@endif
 
 @if($layout == 'index')
     <div class="container-fluid mt-4">
@@ -44,7 +78,7 @@
                     <img src="https://marketplace.canva.com/MAB7yqsko0c/1/screen_2x/canva-smart-little-schoolgirl--MAB7yqsko0c.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Enter the informations of the new student</h5>
-                        <form action="{{ url('/store') }}" method="post">
+                        <form action="{{ url('/store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label>CNE</label>
@@ -68,6 +102,16 @@
                             <div class="form-group">
                                 <label>Speciality</label>
                                 <input name="speciality" type="text" class="form-control"  placeholder="Enter Sepeciality">
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="file" name="image" class="form-control">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-success">Upload</button>
+                                    </div>
+                                </div>
                             </div>
                             <input type="submit" class="btn btn-info" value="Save">
                             <input type="reset" class="btn btn-warning" value="Reset">
@@ -100,7 +144,7 @@
                     <img src="https://marketplace.canva.com/MAB7yqsko0c/1/screen_2x/canva-smart-little-schoolgirl--MAB7yqsko0c.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Update informations of student</h5>
-                        <form action="{{ url('/update/'.$student->id) }}" method="post">
+                        <form action="{{ url('/update/'.$student->id) }}" method="post" enctype="multipart/form-data" >
                             @csrf
                             <div class="form-group">
                                 <label>CNE</label>
@@ -121,6 +165,18 @@
                             <div class="form-group">
                                 <label>Speciality</label>
                                 <input value="{{ $student->speciality }}" name="speciality" type="text" class="form-control"  placeholder="Enter Sepeciality">
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="file" name="image" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button type="submit" class="btn btn-success">Upload</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <input type="submit" class="btn btn-info" value="Update">
                             <input type="reset" class="btn btn-warning" value="Reset">

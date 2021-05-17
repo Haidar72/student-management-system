@@ -47,6 +47,10 @@ class StudentController extends Controller
         $student->secondName = $request->input('secondName');
         $student->age = $request->input('age');
         $student->speciality = $request->input('speciality');
+
+        $student->image =time().'.'. $request->image->extension();
+        $request->image->storeAs('images',$student->image );
+        $request->image->move(public_path('images'), $student->image);
         $student->save();
         return redirect('/');
     }
@@ -96,8 +100,16 @@ class StudentController extends Controller
         $student->secondName = $request->input('secondName') ;
         $student->age = $request->input('age') ;
         $student->speciality = $request->input('speciality') ;
+        $student->image =time().'.'. $request->image->extension();
+        $request->image->storeAs('images',$student->image );
+        $request->image->move(public_path('images'), $student->image);
         $student->save() ;
         return redirect('/') ;
+    }
+    public function photo()
+    {
+        $students = Student::all();
+        return view('student',['layout'=>'photo' , 'students' => $students ]);
     }
 
     /**

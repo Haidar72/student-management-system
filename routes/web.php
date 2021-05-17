@@ -26,3 +26,7 @@ Route::post('/store',[StudentController::class,'store']);
 
 Route::post('/update/{id}',[StudentController::class,'update']);
 
+Route::delete('/delete/{id}', [StudentController::class,'destroy']);
+
+
+Route::get('photo',[StudentController::class,'photo']);
